@@ -1,0 +1,14 @@
+name: ShoppingAgentEnv
+version: 1.0.0
+description: Autonomous Shopping Agent simulating e-commerce decisions
+tasks:
+  - id: task_1_easy
+    description: "Order a medium Margherita pizza."
+    reward_metric: custom
+  - id: task_2_medium
+    description: "Buy a 20W iPhone 15 charger."
+    reward_metric: custom
+  - id: task_3_hard
+    description: "Order a large Pepperoni pizza and checkout."
+    reward_metric: custom
+entry_point: inference.py

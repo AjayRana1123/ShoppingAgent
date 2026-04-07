@@ -1,0 +1,80 @@
+{
+  "dominos": {
+    "categories": ["pizza", "sides", "drinks"],
+    "products": [
+      {
+        "id": "d1",
+        "name": "Margherita Pizza",
+        "category": "pizza",
+        "price": 200,
+        "variants": ["regular", "medium", "large", "cheese burst"]
+      },
+      {
+        "id": "d2",
+        "name": "Pepperoni Pizza",
+        "category": "pizza",
+        "price": 400,
+        "variants": ["medium", "large"]
+      },
+      {
+        "id": "d3",
+        "name": "Garlic Bread",
+        "category": "sides",
+        "price": 100,
+        "variants": ["plain", "stuffed"]
+      },
+      {
+        "id": "d4",
+        "name": "Coke",
+        "category": "drinks",
+        "price": 50,
+        "variants": ["500ml", "1L"]
+      }
+    ]
+  },
+  "amazon": {
+    "categories": ["electronics", "books"],
+    "products": [
+      {
+        "id": "a1",
+        "name": "iPhone 15 Charger",
+        "category": "electronics",
+        "price": 1500,
+        "variants": ["20W", "30W"]
+      },
+      {
+        "id": "a2",
+        "name": "MacBook Air M2",
+        "category": "electronics",
+        "price": 100000,
+        "variants": ["256GB", "512GB"]
+      },
+      {
+        "id": "a3",
+        "name": "Atomic Habits",
+        "category": "books",
+        "price": 300,
+        "variants": ["paperback", "hardcover"]
+      }
+    ]
+  },
+  "flipkart": {
+    "categories": ["clothing", "grocery"],
+    "products": [
+      {
+        "id": "f1",
+        "name": "Men's T-Shirt",
+        "category": "clothing",
+        "price": 500,
+        "variants": ["S", "M", "L", "XL"]
+      },
+      {
+        "id": "f2",
+        "name": "Oats",
+        "category": "grocery",
+        "price": 150,
+        "variants": ["500g", "1kg"]
+      }
+    ]
+  }
+}
