@@ -7,17 +7,17 @@ from tasks_and_graders import TASKS
 def run_inference():
     print("[START] Starting inference run")
     
-    api_base = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
-    model_name = os.getenv("MODEL_NAME", "gpt-3.5-turbo")
-    token = os.getenv("OPENAI_API_KEY") or os.getenv("HF_TOKEN")
+    API_BASE_URL = os.getenv("API_BASE_URL","https://router.huggingface.co/v1")
+    MODEL_NAME = os.getenv("MODEL_NAME", "meta-llama/Meta-Llama-3-8B-Instruct")
+    HF_TOKEN = os.getenv("HF_TOKEN")
     
-    if not token:
+    if not HF_TOKEN:
         print("[END] HF_TOKEN not set")
         return
         
     client = OpenAI(
-        base_url=api_base,
-        api_key=token
+        base_url=API_BASE_URL,
+        api_key=HF_TOKEN
     )
     
     environment = ShoppingEnv(dataset_path="dataset.json")
@@ -54,7 +54,7 @@ Possible actions:
             
             try:
                 response = client.chat.completions.create(
-                    model=model_name,
+                    model=MODEL_NAME,
                     messages=messages,
                     temperature=0.0
                 )
