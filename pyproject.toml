@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "shopping-agent"
+version = "1.0.0"
+description = "Autonomous Shopping Agent simulating e-commerce decisions"
+requires-python = ">=3.10"
+dependencies = [
+    "openai>=1.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.20.0",
+    "pydantic>=2.0.0",
+]
+
+[project.scripts]
+shopping-agent = "inference:run_inference"
+
+[tool.setuptools.packages.find]
+where = ["."]
