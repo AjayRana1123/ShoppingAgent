@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel, ConfigDict
 from typing import Optional, Any, Dict, List
 
@@ -46,7 +46,9 @@ def health_check():
     return {"status": "ok", "message": "Space is running."}
 
 @app.post("/reset", response_model=Observation)
-def reset_endpoint(request: ResetRequest):
+def reset_endpoint(request: Optional[ResetRequest] = Body(default=None)):
+    if request is None:
+        request = ResetRequest()
     state = env.reset(user_request=request.user_request, budget=request.budget)
     return state
 
