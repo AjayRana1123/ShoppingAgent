@@ -12,10 +12,11 @@ dependencies = [
     "fastapi>=0.100.0",
     "uvicorn>=0.20.0",
     "pydantic>=2.0.0",
+    "openenv-core>=0.2.0",
 ]
 
 [project.scripts]
-shopping-agent = "inference:run_inference"
+serve = "server.app:start"
 
 [tool.setuptools.packages.find]
 where = ["."]
