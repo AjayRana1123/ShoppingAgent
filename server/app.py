@@ -8,7 +8,7 @@ from app import app  # noqa: F401 - re-export the FastAPI app
 import uvicorn
 
 
-def start():
+def main():
     """Entry point for the server (used by pyproject.toml scripts)."""
     uvicorn.run(
         "server.app:app",
@@ -19,4 +19,4 @@ def start():
 
 
 if __name__ == "__main__":
-    start()
+    main()
