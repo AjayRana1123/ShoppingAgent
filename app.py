@@ -35,11 +35,28 @@ class Observation(BaseModel):
 class Reward(BaseModel):
     value: float
 
+class EvaluateRequest(BaseModel):
+    model_config = ConfigDict(extra='allow')
+    task_id: str
+
+class EvaluateResponse(BaseModel):
+    score: float
+
 class StepResponse(BaseModel):
     observation: Observation
     reward: float
     done: bool
     info: Dict[str, Any]
+
+from tasks_and_graders import TASKS
+
+@app.post("/evaluate", response_model=EvaluateResponse)
+def evaluate_endpoint(req: EvaluateRequest):
+    for task in TASKS:
+        if task["id"] == req.task_id:
+            score = task["grader"](env)
+            return {"score": score}
+    raise HTTPException(status_code=404, detail="Task not found")
 
 @app.get("/")
 def health_check():

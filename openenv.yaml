@@ -6,9 +6,9 @@ tasks:
     description: "Order a medium Margherita pizza."
     reward_metric: custom
   - id: task_2_medium
-    description: "Buy a 20W iPhone 15 charger."
+    description: "Order a paperback copy of Atomic Habits and a 30W iPhone 15 charger."
     reward_metric: custom
   - id: task_3_hard
-    description: "Order a large Pepperoni pizza and checkout."
+    description: "Order a large Pepperoni pizza, stuffed Garlic Bread, and 1kg of Oats from flipkart."
     reward_metric: custom
 entry_point: inference.py

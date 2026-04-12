@@ -34,69 +34,50 @@ def grade_task_easy(env_instance):
 
 def grade_task_medium(env_instance):
     """
-    Task: "Buy a 20W iPhone 15 charger."
+    Task: "Order a paperback copy of Atomic Habits and a 30W iPhone 15 charger."
     Score is strictly between 0 and 1 (exclusive) as required by OpenEnv.
-    - 0.9 if checked out successfully with correct charger (a1, 20W)
-    - 0.7 if correct item is in cart
-    - 0.5 if correct item is selected
-    - 0.3 if on amazon platform
-    - 0.1 baseline partial credit
     """
-    # Successful checkout with correct item
+    has_book = any(item["product"]["id"] == "a3" and item["variant"] == "paperback" for item in env_instance.cart)
+    has_charger = any(item["product"]["id"] == "a1" and item["variant"] == "30W" for item in env_instance.cart)
+    items_in_cart = sum([has_book, has_charger])
+    
     if env_instance.status == "success":
-        for item in env_instance.cart:
-            if item["product"]["id"] == "a1" and item["variant"] == "20W":
-                return 0.9
-        return 0.5
-
-    # Correct item in cart
-    for item in env_instance.cart:
-        if item["product"]["id"] == "a1" and item["variant"] == "20W":
-            return 0.7
-
-    # Correct item selected but not in cart
-    if env_instance.selected_product:
-        if env_instance.selected_product["product"]["id"] == "a1" and env_instance.selected_product["variant"] == "20W":
-            return 0.5
-
-    # At least on the right platform
+        if items_in_cart == 2: return 0.9
+        if items_in_cart == 1: return 0.7
+        return 0.4
+    
+    if items_in_cart == 2: return 0.6
+    if items_in_cart == 1: return 0.4
+    
     if env_instance.current_platform == "amazon":
-        return 0.3
-
+        return 0.2
+        
     return 0.1
 
 
 def grade_task_hard(env_instance):
     """
-    Task: "Order a large Pepperoni pizza and checkout."
+    Task: "Order a large Pepperoni pizza, stuffed Garlic Bread, and 1kg of Oats from flipkart."
     Score is strictly between 0 and 1 (exclusive) as required by OpenEnv.
-    - 0.9 if successfully checked out with correct pizza (d2, large)
-    - 0.6 if correct item is in cart (not yet checked out)
-    - 0.4 if correct item is selected
-    - 0.2 if on dominos platform
-    - 0.1 baseline partial credit
     """
-    # Successful checkout with correct item
+    has_pizza = any(item["product"]["id"] == "d2" and item["variant"] == "large" for item in env_instance.cart)
+    has_bread = any(item["product"]["id"] == "d3" and item["variant"] == "stuffed" for item in env_instance.cart)
+    has_oats = any(item["product"]["id"] == "f2" and item["variant"] == "1kg" for item in env_instance.cart)
+    items_in_cart = sum([has_pizza, has_bread, has_oats])
+    
     if env_instance.status == "success":
-        for item in env_instance.cart:
-            if item["product"]["id"] == "d2" and item["variant"] == "large":
-                return 0.9
-        return 0.4
-
-    # Correct item in cart
-    for item in env_instance.cart:
-        if item["product"]["id"] == "d2" and item["variant"] == "large":
-            return 0.6
-
-    # Correct item selected
-    if env_instance.selected_product:
-        if env_instance.selected_product["product"]["id"] == "d2" and env_instance.selected_product["variant"] == "large":
-            return 0.4
-
-    # At least on the right platform
-    if env_instance.current_platform == "dominos":
+        if items_in_cart == 3: return 0.9
+        if items_in_cart == 2: return 0.7
+        if items_in_cart == 1: return 0.5
+        return 0.3
+        
+    if items_in_cart == 3: return 0.6
+    if items_in_cart == 2: return 0.5
+    if items_in_cart == 1: return 0.3
+    
+    if env_instance.current_platform in ["dominos", "flipkart"]:
         return 0.2
-
+        
     return 0.1
 
 
@@ -108,12 +89,12 @@ TASKS = [
     },
     {
         "id": "task_2_medium",
-        "description": "Buy a 20W iPhone 15 charger.",
+        "description": "Order a paperback copy of Atomic Habits and a 30W iPhone 15 charger.",
         "grader": grade_task_medium
     },
     {
         "id": "task_3_hard",
-        "description": "Order a large Pepperoni pizza and checkout.",
+        "description": "Order a large Pepperoni pizza, stuffed Garlic Bread, and 1kg of Oats from flipkart.",
         "grader": grade_task_hard
     }
 ]
