@@ -74,7 +74,7 @@ def run_llm_task(client, model_name, environment, task_spec):
         }
     ]
 
-    while not done and step_count < 10:
+    while not done and step_count < 30:
         state_prompt = f"""
 Current task: {state["user_request"]}
 Available platforms: {state["available_platforms"]}
